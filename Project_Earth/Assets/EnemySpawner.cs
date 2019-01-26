@@ -30,7 +30,13 @@ public class EnemySpawner : MonoBehaviour
     {
         float height = 2f * Camera.main.orthographicSize;
         float width = height * Camera.main.aspect;
-        Vector2 v2Pos = new Vector2(Camera.main.transform.position.x + Random.Range(-width, width), Camera.main.transform.position.z + height + Random.Range(-30, 30));
-        Instantiate(enemy, v2Pos, Quaternion.identity);
+        int sign = Random.Range(0, 2) * 2 - 1;
+        
+            Vector2 v2Pos = new Vector2(Camera.main.transform.position.x + Random.Range(-width, width), Camera.main.transform.position.z + height + Random.Range(sign*10, sign*30));
+            Instantiate(enemy, v2Pos, Quaternion.identity);
+       
+        
+        
+        
     }
 }
