@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Slider hpBar;
-    private int totalHP = 100;
+    private int totalHP = 100, gold = 0;
+    public Text goldText;
     public GameObject earth, tPanel, sPanel;
 
     public void Update()
     {
-        totalHP--;
         hpBar.value = 100 - totalHP;
+        goldText.text = "" + gold;
     }
 
     public void ToggleTPanel()
