@@ -7,22 +7,10 @@ public class Tile : MonoBehaviour
     GameObject containedTower = null;
     bool canPlace = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void addTower(GameObject tower)
+    void addTower(int towerID)
     {
         Quaternion rot = Quaternion.FromToRotation(Vector3.right, transform.position);
-        GameObject temp = Instantiate(tower, transform.position, rot);
+        GameObject temp = Instantiate(GameStorage.instance.towerPrefabs[towerID], transform.position, rot);
         temp.transform.parent = gameObject.transform;
         containedTower = temp;
         canPlace = false;
@@ -63,7 +51,7 @@ public class Tile : MonoBehaviour
     {
         if (ItemHolder.instance.HeldItem != null && canPlace == true)
         {
-            addTower(ItemHolder.instance.HeldItem);
+            addTower(ItemHolder.instance.heldTower);
         }
         else if (canPlace == false)
         {

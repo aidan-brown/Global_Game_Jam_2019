@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemHolder : MonoBehaviour
+public class GameStorage : MonoBehaviour
 {
+    [SerializeField] public int playerCurrency = 500;
+    [SerializeField] public List<GameObject> towerPrefabs;
+    [SerializeField] public List<GameObject> satellitePrefabs;
 
-    public GameObject HeldItem;
-
-    public int heldTower;
-
-    public static ItemHolder instance;
+    public static GameStorage instance;
 
     void Awake()
     {
@@ -22,11 +21,4 @@ public class ItemHolder : MonoBehaviour
 
         instance = this;
     }
-
-    void emptyHeldItem()
-    {
-        HeldItem = null;
-
-    }
-
 }
