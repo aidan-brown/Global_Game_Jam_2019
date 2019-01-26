@@ -1,0 +1,36 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemySpawner : MonoBehaviour
+{
+    private float timeBtwSpawn = 0;
+
+    [SerializeField] GameObject enemy;
+    private float camMin;
+    private float camMax;
+
+    void Start()
+    {
+        camMin = Camera.main.orthographicSize;
+        camMax = Camera.main.orthographicSize + 2;
+        
+        InvokeRepeating("spawnEnemy", 2.0f, 0.3f);
+
+    }
+    
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+
+    void spawnEnemy()
+    {
+        float height = 2f * Camera.main.orthographicSize;
+        float width = height * Camera.main.aspect;
+        Vector2 v2Pos = new Vector2(Camera.main.transform.position.x + Random.Range(-width, width), Camera.main.transform.position.z + height + Random.Range(-30, 30));
+        Instantiate(enemy, v2Pos, Quaternion.identity);
+    }
+}
