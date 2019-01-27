@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempPlayerThing : MonoBehaviour
+public class ProjectileBase : MonoBehaviour
 {
-    public int cost = 130;
+    public int damage;
 }

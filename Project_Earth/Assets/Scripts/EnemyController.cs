@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("PlayerBullet"))
         {
-            health -= 5;
+            health -= other.GetComponent<ProjectileBase>().damage;
             if (health <= 0)
                 destroyShip();
         }
