@@ -21,8 +21,17 @@ public class EnemyController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		rotateToTarget();
-		transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), attackTarget.transform.position, Time.deltaTime * speed);
+		if(attackTarget != null)
+		{
+			rotateToTarget();
+			transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), attackTarget.transform.position, Time.deltaTime * speed);
+		}
+		else
+		{
+			destroyShip();
+		}
+
+
 	}
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -54,12 +63,17 @@ public class EnemyController : MonoBehaviour
 
 	private void rotateToTarget()
 	{
-		Vector3 vectorToTarget = attackTarget.transform.position - transform.position;
-		float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+		if(attackTarget != null)
+		{
+			Vector3 vectorToTarget = attackTarget.transform.position - transform.position;
+			float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
 
-		Quaternion q = Quaternion.AngleAxis(angle-90, Vector3.forward);
+			Quaternion q = Quaternion.AngleAxis(angle-90, Vector3.forward);
 
-		transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 100);
+			transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 100);
+		}
+
+
 	}
 
 	public void destroyShip()

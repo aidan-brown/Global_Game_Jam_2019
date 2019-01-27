@@ -9,6 +9,7 @@ public class Earth : MonoBehaviour
     [SerializeField] GameObject tile; // tile to create
     [SerializeField] int tileAmount;
     [SerializeField] List<GameObject> spaces;
+	[SerializeField] ParticleSystem effect;
 
     public Slider hpBar;
     private int totalHP = 100;
@@ -33,6 +34,11 @@ public class Earth : MonoBehaviour
         //rotate earth
         transform.Rotate(Vector3.forward * (RotationSpeed * Time.deltaTime));
         hpBar.value = 100 - totalHP;
+
+		if(totalHP <=0)
+		{
+			DestroyEarth();
+		}
     }
 
 
@@ -67,6 +73,14 @@ public class Earth : MonoBehaviour
     {
         totalHP -= 5;
     }
+
+
+	public void DestroyEarth()
+	{
+		Instantiate(effect, transform.position, Quaternion.identity);
+		Destroy(gameObject);
+	}
+
 }
 
 

@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
 
 	[SerializeField] GameObject enemy;
 	[SerializeField] float spawnInterval = 1.0f;
+	private GameObject earth;
 	private float camMin;
 	private float camMax;
 
@@ -15,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
 	{
 		camMin = Camera.main.orthographicSize;
 		camMax = Camera.main.orthographicSize + 2;
-
+		earth = GameObject.FindGameObjectWithTag("Earth");
 		InvokeRepeating("spawnEnemy", 2.0f, spawnInterval);
 
 	}
@@ -23,7 +24,10 @@ public class EnemySpawner : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
+		if(earth == null)
+		{
+			Destroy(gameObject);
+		}
 	}
 
 
