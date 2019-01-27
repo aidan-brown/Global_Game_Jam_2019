@@ -120,5 +120,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTarget: {fileID: 0}
-  speed: 0.5
+  speed: 2
   effect: {fileID: 8655064330048386795, guid: 6ad3a92fd4a87d4429055c0c52be291b, type: 3}
