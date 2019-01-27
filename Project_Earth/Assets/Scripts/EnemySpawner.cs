@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     private float timeBtwSpawn = 0;
 
     [SerializeField] GameObject enemy;
+	[SerializeField] float spawnInterval = 1.0f;
     private float camMin;
     private float camMax;
 
@@ -15,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
         camMin = Camera.main.orthographicSize;
         camMax = Camera.main.orthographicSize + 2;
         
-        InvokeRepeating("spawnEnemy", 2.0f, 0.5f);
+        InvokeRepeating("spawnEnemy", 2.0f, spawnInterval);
 
     }
     
