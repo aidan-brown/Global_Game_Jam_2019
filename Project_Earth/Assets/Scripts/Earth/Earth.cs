@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Earth : MonoBehaviour
 {
-	[SerializeField] int RotationSpeed;
+    [SerializeField] int RotationSpeed;
     [SerializeField] GameObject tile; // tile to create
     [SerializeField] int tileAmount;
     [SerializeField] List<GameObject> spaces;
+
+    public Slider hpBar;
+    private int totalHP = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -15,20 +19,20 @@ public class Earth : MonoBehaviour
         Vector3 center = transform.position;
         for (int i = 0; i < tileAmount; i++)
         {
-            Vector3 pos = placeOnCircle(center, 2.2f, i*20);
+            Vector3 pos = placeOnCircle(center, 2.2f, i * 20);
             Quaternion rot = Quaternion.FromToRotation(Vector3.right, center - pos);
             GameObject temp = Instantiate(tile, pos, rot);
             temp.transform.parent = gameObject.transform;
             spaces.Add(temp);
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
-		//rotate earth
-		transform.Rotate ( Vector3.forward* ( RotationSpeed * Time.deltaTime ) );
+        //rotate earth
+        transform.Rotate(Vector3.forward * (RotationSpeed * Time.deltaTime));
+        hpBar.value = 100 - totalHP;
     }
 
 
@@ -56,8 +60,12 @@ public class Earth : MonoBehaviour
         foreach (GameObject t in spaces)
         {
             t.GetComponent<Tile>().hideTile();
-
         }
+    }
+
+    public void TakeDamage()
+    {
+        totalHP -= 5;
     }
 }
 

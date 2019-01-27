@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 634645aadc404854c8fe1dff41bf0a77
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: SciFly
+  fontNames:
+  - SciFly
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6f835a7483d5b624ab6ccc5c2c3d5920, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
