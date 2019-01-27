@@ -11,40 +11,46 @@ using UnityEngine;
 public class LaserTurret : Turret
 {
     public GameObject laserPrefab;
-    public float timeSinceLastFire = 3.0f;
-    private bool isFiring = false;
+    public float timeSinceLastFire;
     private float firingTime = 0;
+    public int laserDuration;
+    
 
     private void Start()
     {
-        timeSinceLastFire = 0; //Sets the time since last fired to 0
+        timeSinceLastFire = 3;
         laserPrefab.GetComponent<ProjectileBase>().damage = damage;
     }
 
     private void Update()
     {
         base.Update();
-        if (timeSinceLastFire >= fireRate && !isFiring && enemiesInRange.Count > 0)
-        {
-            isFiring = true;
-            timeSinceLastFire = 0;
-        }
-        else if (!isFiring)
-        {
-            Debug.Log(timeSinceLastFire);
-            timeSinceLastFire += Time.deltaTime;
-        }
-
-        if (firingTime < fireRate && isFiring)
+        if(timeSinceLastFire >= fireRate && enemiesInRange.Count > 0)
         {
             laserPrefab.SetActive(true);
-            firingTime += Time.deltaTime;
-        }
-        else if (isFiring)
-        {
-            Debug.Log(firingTime);
+            timeSinceLastFire = 0;
             firingTime = 0;
-            isFiring = false;
+            
+        }
+        else if (!laserPrefab.activeSelf)
+        {
+            timeSinceLastFire += Time.deltaTime;
+        }
+        else
+        {
+            firingTime += Time.deltaTime;
+            Collider2D[] collided = new Collider2D[10];
+            laserPrefab.GetComponent<BoxCollider2D>().OverlapCollider(new ContactFilter2D(), collided);
+            foreach(Collider2D c in collided)
+            {
+                if(c != null && c.gameObject.CompareTag("Enemy"))
+                {
+                    c.GetComponent<EnemyController>().TakeDamage(damage);
+                }
+            }
+        }
+
+        if (firingTime >= laserDuration) {
             laserPrefab.SetActive(false);
         }
     }

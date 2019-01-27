@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class ItemHolder : MonoBehaviour
 {
-
-    public GameObject HeldItem;
-
     public int heldTower;
 
     public static ItemHolder instance;
 
     void Awake()
     {
-
         if (instance != null)
         {
             Debug.LogWarning("More than one instance of Inventory found!");
@@ -21,12 +17,17 @@ public class ItemHolder : MonoBehaviour
         }
 
         instance = this;
+
+        instance.emptyHeldItem();
     }
 
-    void emptyHeldItem()
+    public void emptyHeldItem()
     {
-        HeldItem = null;
-
+        instance.heldTower = -1;
     }
 
+    public void SelectTower(int towerID)
+    {
+        instance.heldTower = towerID;
+    }
 }

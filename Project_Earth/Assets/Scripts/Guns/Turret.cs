@@ -7,22 +7,22 @@ public class Turret : MonoBehaviour
     /// <summary>
     /// Current health of the given tower that exists
     /// </summary>
-    public int health = 100;
+    public int health;
 
     /// <summary>
     /// Determines the rate at which the tower fires
     /// </summary>
-    public float fireRate = 2;
+    public float fireRate;
 
     /// <summary>
     /// The amount of damage that is done by each tower, ie the bullet damage
     /// </summary>
-    public int damage = 40;
+    public int damage;
 
     /// <summary>
     /// The cost of the 
     /// </summary>
-    public int cost = 100;
+    public int cost;
 
     /// <summary>
     /// Can go from level 1 to 3, starts at 1

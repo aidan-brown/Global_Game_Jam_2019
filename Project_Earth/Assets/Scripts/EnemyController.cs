@@ -18,22 +18,27 @@ public class EnemyController : MonoBehaviour
 		attackTarget = GameObject.FindGameObjectsWithTag("Earth")[0];
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-		rotateToTarget();
-		transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), attackTarget.transform.position, Time.deltaTime * speed);
-	}
+    // Update is called once per frame
+    void Update()
+    {
+        if (attackTarget != null)
+        {
+            rotateToTarget();
+            transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), attackTarget.transform.position, Time.deltaTime * speed);
+        }
+        else
+        {
+            destroyShip();
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("playerBullet"))
 		{
-            health -= other.gameObject.GetComponent<ProjectileBase>().damage;
+            TakeDamage(other.gameObject.GetComponent<ProjectileBase>().damage);
             if (other.gameObject.GetComponent<ProjectileBase>().destroyOnHit)
                 Destroy(other.gameObject);
-            if (health <= 0)
-				destroyShip();
 		}
     }
 
@@ -45,6 +50,14 @@ public class EnemyController : MonoBehaviour
 			other.BroadcastMessage("TakeDamage");
 		}
 	}
+
+    public void TakeDamage(int damage)
+    {
+        Debug.Log("Dealing Damage");
+        health -= damage;
+        if (health <= 0)
+		    destroyShip();
+    }
 
 	public void changeAttackTarget(GameObject target)
 	{

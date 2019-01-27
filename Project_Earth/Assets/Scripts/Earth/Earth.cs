@@ -9,14 +9,17 @@ public class Earth : MonoBehaviour
     [SerializeField] GameObject tile; // tile to create
     [SerializeField] int tileAmount;
     [SerializeField] List<GameObject> spaces;
+    [SerializeField] ParticleSystem effect;
 
     public Slider hpBar;
     private int totalHP = 100;
+    private bool areTilesHidden;
 
     // Start is called before the first frame update
     void Start()
     {
         Vector3 center = transform.position;
+        areTilesHidden = true;
         for (int i = 0; i < tileAmount; i++)
         {
             Vector3 pos = placeOnCircle(center, 2.2f, i * 20);
@@ -33,6 +36,11 @@ public class Earth : MonoBehaviour
         //rotate earth
         transform.Rotate(Vector3.forward * (RotationSpeed * Time.deltaTime));
         hpBar.value = 100 - totalHP;
+
+        if (totalHP <= 0)
+        {
+            DestroyEarth();
+        }
     }
 
 
@@ -63,9 +71,29 @@ public class Earth : MonoBehaviour
         }
     }
 
+    public void toggleTiles()
+    {
+        if (areTilesHidden)
+        {
+            areTilesHidden = false;
+            showTiles();
+        }
+        else
+        {
+            areTilesHidden = true;
+            hideTiles();
+        }
+    }
+
     public void TakeDamage()
     {
         totalHP -= 5;
+    }
+
+    public void DestroyEarth()
+    {
+        Instantiate(effect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
 

@@ -9,12 +9,16 @@ public class Tile : MonoBehaviour
 
     void addTower(int towerID)
     {
-        Quaternion rot = Quaternion.FromToRotation(Vector3.right, transform.position);
-        GameObject temp = Instantiate(GameStorage.instance.towerPrefabs[towerID], transform.position, rot);
-        temp.transform.parent = gameObject.transform;
-        containedTower = temp;
-        canPlace = false;
-        hideTile();
+        if (GameStorage.instance.playerCurrency >= GameStorage.instance.towerPrefabs[towerID].GetComponentInChildren<Turret>().cost)
+        {
+            GameStorage.instance.playerCurrency -= GameStorage.instance.towerPrefabs[towerID].GetComponentInChildren<Turret>().cost;
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, transform.position);
+            GameObject temp = Instantiate(GameStorage.instance.towerPrefabs[towerID], transform.position, rot);
+            temp.transform.parent = gameObject.transform;
+            containedTower = temp;
+            canPlace = false;
+            hideTile();
+        }
     }
 
     public void removeTower()
@@ -35,7 +39,7 @@ public class Tile : MonoBehaviour
             tmp.a = 0.5f;
             gameObject.GetComponent<SpriteRenderer>().color = tmp;
         }
-      
+
     }
 
     public void hideTile()
@@ -49,7 +53,8 @@ public class Tile : MonoBehaviour
     //handles adding Towers
     void OnMouseDown()
     {
-        if (ItemHolder.instance.HeldItem != null && canPlace == true)
+        Debug.Log("Mouse Down : " + ItemHolder.instance.heldTower);
+        if (ItemHolder.instance.heldTower != -1 && canPlace == true)
         {
             addTower(ItemHolder.instance.heldTower);
         }
