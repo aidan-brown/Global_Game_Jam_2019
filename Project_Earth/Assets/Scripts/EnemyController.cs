@@ -21,24 +21,28 @@ public class EnemyController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
-
 		rotateToTarget();
 		transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), attackTarget.transform.position, Time.deltaTime * speed);
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("playerBullet"))
+		{
+            health -= other.gameObject.GetComponent<ProjectileBase>().damage;
+            if (other.gameObject.GetComponent<ProjectileBase>().destroyOnHit)
+                Destroy(other.gameObject);
+            if (health <= 0)
+				destroyShip();
+		}
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.gameObject.CompareTag("Earth"))
 		{
 			destroyShip();
 			other.BroadcastMessage("TakeDamage");
-		}
-		else if (other.gameObject.CompareTag("PlayerBullet"))
-		{
-			health -= 5;
-			if (health <= 0)
-				destroyShip();
 		}
 	}
 
@@ -60,8 +64,8 @@ public class EnemyController : MonoBehaviour
 
 	public void destroyShip()
 	{
-
 		Instantiate(effect, transform.position, Quaternion.identity);
+        GameStorage.instance.playerCurrency += 20;
 		Destroy(gameObject);
 	}
 }
