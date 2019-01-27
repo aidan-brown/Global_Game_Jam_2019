@@ -2688,6 +2688,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 162200895947600753, guid: e92d275c3b034604392147d78e180832,
+        type: 3}
+      propertyPath: m_Name
+      value: low poly earths
+      objectReference: {fileID: 0}
+    - target: {fileID: 162200895947600753, guid: e92d275c3b034604392147d78e180832,
+        type: 3}
+      propertyPath: m_TagString
+      value: Earth
+      objectReference: {fileID: 0}
     - target: {fileID: 11460490820503573, guid: e92d275c3b034604392147d78e180832,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2758,16 +2768,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 162200895947600753, guid: e92d275c3b034604392147d78e180832,
-        type: 3}
-      propertyPath: m_Name
-      value: low poly earths
-      objectReference: {fileID: 0}
-    - target: {fileID: 162200895947600753, guid: e92d275c3b034604392147d78e180832,
-        type: 3}
-      propertyPath: m_TagString
-      value: Earth
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e92d275c3b034604392147d78e180832, type: 3}
 --- !u!1 &162200895947600753 stripped
@@ -2788,9 +2788,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a74f9339ab2b5cb43b86740aba284357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 0
+  RotationSpeed: 10
   tile: {fileID: 107419906537983081, guid: b17c5a3710ce11c4085130a241084b20, type: 3}
-  tileAmount: 0
+  tileAmount: 18
   spaces: []
   hpBar: {fileID: 321051447}
 --- !u!4 &162200895947600755 stripped

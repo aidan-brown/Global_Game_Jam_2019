@@ -8,9 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : Tower 
+public class LaserTurret : Turret
 {
-    public List<GameObject> enemiesInRange = new List<GameObject>();
     public GameObject laserPrefab;
     public float timeSinceLastFire = 3.0f;
     private bool isFiring = false;
@@ -22,26 +21,9 @@ public class Laser : Tower
         laserPrefab.GetComponent<ProjectileBase>().damage = damage;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("The object has entered the area");
-        if (other.gameObject.tag == "enemy" && !enemiesInRange.Contains(other.gameObject))
-        {
-            enemiesInRange.Add(other.gameObject);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if(other.gameObject.tag == "enemy")
-        {
-            enemiesInRange.Remove(other.gameObject);
-        }
-    }
-
     private void Update()
     {
-
+        base.Update();
         if (timeSinceLastFire >= fireRate && !isFiring && enemiesInRange.Count > 0)
         {
             isFiring = true;

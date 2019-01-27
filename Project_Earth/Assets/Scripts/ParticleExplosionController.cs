@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticalExplostionController : MonoBehaviour
+public class ParticleExplosionController : MonoBehaviour
 {
     private ParticleSystem parts;
     private float totalDuration;
@@ -12,11 +12,5 @@ public class ParticalExplostionController : MonoBehaviour
        parts  = gameObject.GetComponent<ParticleSystem>();
         totalDuration = parts.duration + parts.startLifetime;
         Destroy(gameObject, totalDuration);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

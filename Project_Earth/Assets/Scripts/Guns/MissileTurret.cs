@@ -2,56 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Targetting : Tower
+public class MissileTurret : Turret
 {
     public GameObject rocketPF;
-    public List<GameObject> enemiesInRange = new List<GameObject>();
-    public GameObject target;
-    public float timeSinceLastFire = 3;
+    public float timeSinceLastFire;
 
     private void Start()
     {
         timeSinceLastFire = 0; //Sets the time since last fired to 0
     }
 
-    public void FireRocket(GameObject target)
+    public void FireRocket()
     {
-        GameObject rocket = Instantiate(rocketPF, transform);
-        rocket.GetComponent<Missile>().SetTarget(target);
+        GameObject rocket = Instantiate(rocketPF, transform.position, transform.rotation);
+        Debug.Log(enemiesInRange[0] == null);
+        rocket.GetComponent<Missile>().SetTarget(enemiesInRange[0]);
         rocket.GetComponent<ProjectileBase>().damage = damage;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("The object has entered the area");
-        if (other.gameObject.tag == "enemy" && !enemiesInRange.Contains(other.gameObject))
-        {
-            if(target == null)
-                target = other.gameObject;
-            enemiesInRange.Add(other.gameObject);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "enemy")
-        {
-            enemiesInRange.Remove(other.gameObject);
-            if (target == other.gameObject)
-            {
-                target = null;
-                if (enemiesInRange.Count != 0)
-                    target = enemiesInRange[0];
-            }
-        }
     }
 
     public void Update()
     {
+        base.Update();
         if (enemiesInRange.Count > 0 && timeSinceLastFire >= fireRate)
         {
             timeSinceLastFire = 0;
-            FireRocket(target);
+            FireRocket();
         }
         else
         {

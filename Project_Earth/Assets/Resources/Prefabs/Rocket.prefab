@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 8049091444024790472}
   - component: {fileID: 864384745734918416}
   - component: {fileID: 8773212162055664263}
-  - component: {fileID: 7367463172532691518}
+  - component: {fileID: 2671021803285624728}
   m_Layer: 0
   m_Name: Rocket
-  m_TagString: Untagged
+  m_TagString: playerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 6797341932721853352}
   m_LocalRotation: {x: -0, y: -0, z: 0.70543146, w: 0.70877814}
   m_LocalPosition: {x: 0.0009999537, y: 0.246, z: 0.05709375}
-  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalScale: {x: 2, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -128,25 +128,26 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7367463172532691518
+--- !u!114 &2671021803285624728
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4058374587230889231, guid: f00ac77e899802946989a72e533e14ee,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6797341932721853352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4cd8b85bf83df428b9e55d13d1696e, type: 3}
+  m_Script: {fileID: 11500000, guid: 75fabef833238d041a228557ae897a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
+  destroyOnHit: 1
   speed: 3
   rotatingSpeed: 200
   target: {fileID: 0}

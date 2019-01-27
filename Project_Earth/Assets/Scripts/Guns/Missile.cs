@@ -21,24 +21,28 @@ public class Missile : ProjectileBase
 
     void FixedUpdate()
     {
-        Vector2 pointToTarget = (Vector2)transform.position - (Vector2)target.transform.position;
+        if (target != null)
+        {
+            Debug.Log("Moving");
+            Vector2 pointToTarget = (Vector2)transform.position - (Vector2)target.transform.position;
 
-        pointToTarget.Normalize();
-        float value = Vector3.Cross(pointToTarget, transform.right).z;
+            pointToTarget.Normalize();
+            float value = Vector3.Cross(pointToTarget, transform.right).z;
 
-        if (value > 0)
-        {
-            rb.angularVelocity = rotatingSpeed;
+            if (value > 0)
+            {
+                rb.angularVelocity = rotatingSpeed;
+            }
+            else if (value < 0)
+            {
+                rb.angularVelocity = -rotatingSpeed;
+            }
+            else
+            {
+                rotatingSpeed = 0;
+            }
+            rb.velocity = transform.right * speed;
         }
-        else if (value < 0)
-        {
-            rb.angularVelocity = -rotatingSpeed;
-        }
-        else
-        {
-            rotatingSpeed = 0;
-        }
-        rb.velocity = transform.right * speed;
     }
 
     public void SetTarget(GameObject target)

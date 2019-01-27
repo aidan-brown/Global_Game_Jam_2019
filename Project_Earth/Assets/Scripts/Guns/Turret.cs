@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+public class Turret : MonoBehaviour
 {
     /// <summary>
     /// Current health of the given tower that exists
@@ -29,17 +29,53 @@ public class Tower : MonoBehaviour
     /// </summary>
     private int level;
 
+    /// <summary>
+    /// A list of all enemies in range to be shot
+    /// </summary>
+    public List<GameObject> enemiesInRange = new List<GameObject>();
+
     private void Start()
     {
         level = 1;
     }
 
-    void OnTriggerEnter(Collider other)
+    public void Update()
     {
-        if (other.gameObject.tag == "playerBullets")
+        while (enemiesInRange.Count > 0 && enemiesInRange[0] == null)
         {
-            //Add health decrease here
+            enemiesInRange.RemoveAt(0);
         }
     }
 
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "enemyBullet")
+        {
+            health -= other.gameObject.GetComponent<ProjectileBase>().damage;
+            if (health <= 0)
+            {
+                if (GetComponentInParent<Tile>() != null)
+                    GetComponentInParent<Tile>().removeTower();
+                else
+                    Destroy(gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("The object has entered the area");
+        if (other.gameObject.tag == "Enemy" && !enemiesInRange.Contains(other.gameObject))
+        {
+            enemiesInRange.Add(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            enemiesInRange.Remove(other.gameObject);
+        }
+    }
 }

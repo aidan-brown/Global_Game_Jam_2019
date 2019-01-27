@@ -17,7 +17,7 @@ public class Tile : MonoBehaviour
         hideTile();
     }
 
-    void removeTower()
+    public void removeTower()
     {
 
         //if we make a list of towers it must be removed as well

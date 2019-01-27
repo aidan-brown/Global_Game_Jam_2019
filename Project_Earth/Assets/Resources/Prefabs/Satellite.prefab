@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7326641552631902822}
-  - component: {fileID: 7884256957343069811}
   m_Layer: 0
   m_Name: Satellite
   m_TagString: Untagged
@@ -32,19 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7884256957343069811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1317059660083362975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a21c6dff3dfa8e4aa93e38ba2c934d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: 130
 --- !u!1 &7056665828187497905
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +44,8 @@ GameObject:
   - component: {fileID: 553446635318110006}
   - component: {fileID: 4224863599717390266}
   - component: {fileID: 8646691518473385430}
+  - component: {fileID: 8868537853789579825}
+  - component: {fileID: 687697375707432277}
   m_Layer: 0
   m_Name: Sat?
   m_TagString: Untagged
@@ -116,8 +104,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -179,4 +167,36 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.6
+--- !u!114 &8868537853789579825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7056665828187497905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80e7775f5c9a7d4eb698f8868be2d62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &687697375707432277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7056665828187497905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548ede410697af64791927a8c9198fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  fireRate: 0.3
+  damage: 40
+  cost: 100
+  enemiesInRange: []
+  rocketPF: {fileID: 6797341932721853352, guid: 26de646685c29ec4182deade6481b5d1,
+    type: 3}
+  timeSinceLastFire: 3

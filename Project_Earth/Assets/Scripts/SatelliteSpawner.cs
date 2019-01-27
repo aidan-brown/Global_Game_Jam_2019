@@ -25,14 +25,15 @@ public class SatelliteSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log(interimSat == null);
         interimSat = Instantiate(GameStorage.instance.satellitePrefabs[satelliteID], earth.position, earth.rotation);
+        interimSat.GetComponentInChildren<Turret>().enabled = false;
+        interimSat.GetComponentInChildren<SatelliteMotion>().enabled = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         interimSat.transform.GetChild(0).position = cam.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, spawnDistance));
-        if (GameStorage.instance.playerCurrency >= GameStorage.instance.satellitePrefabs[satelliteID].GetComponent<Tower>().cost)
+        if (GameStorage.instance.playerCurrency >= GameStorage.instance.satellitePrefabs[satelliteID].GetComponentInChildren<Turret>().cost)
             interimSat.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         else
             interimSat.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
@@ -46,8 +47,12 @@ public class SatelliteSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
         else
         {
-            if (GameStorage.instance.playerCurrency >= GameStorage.instance.satellitePrefabs[satelliteID].GetComponent<Tower>().cost)
-                GameStorage.instance.playerCurrency -= GameStorage.instance.satellitePrefabs[satelliteID].GetComponent<Tower>().cost;
+            if (GameStorage.instance.playerCurrency >= GameStorage.instance.satellitePrefabs[satelliteID].GetComponentInChildren<Turret>().cost)
+            {
+                GameStorage.instance.playerCurrency -= GameStorage.instance.satellitePrefabs[satelliteID].GetComponentInChildren<Turret>().cost;
+                interimSat.GetComponentInChildren<Turret>().enabled = true;
+                interimSat.GetComponentInChildren<SatelliteMotion>().enabled = true;
+            }
             else
                 Destroy(interimSat);
         }

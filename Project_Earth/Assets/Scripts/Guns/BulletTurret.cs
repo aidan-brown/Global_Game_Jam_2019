@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : Tower
+public class BulletTurret : Turret
 {
-    public List<GameObject> enemiesInRange = new List<GameObject>();
     public GameObject bulletPrefab;
     public float timeSinceLastFire = 5.0f;
     public bool isFiring = false;
@@ -15,25 +14,10 @@ public class Bullet : Tower
         timeSinceLastFire = 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("The object has entered the area");
-        if (other.gameObject.tag == "enemy" && !enemiesInRange.Contains(other.gameObject))
-        {
-            enemiesInRange.Add(other.gameObject);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "enemy")
-        {
-            enemiesInRange.Remove(other.gameObject);
-        }
-    }
 
     private void Update()
     {
+        base.Update();
         if(timeSinceLastFire >= fireRate && !isFiring && enemiesInRange.Count > 0)
         {
             isFiring = true;
