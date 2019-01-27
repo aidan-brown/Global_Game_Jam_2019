@@ -9,7 +9,9 @@ public class ParticalExplostionController : MonoBehaviour
 
     void Start()
     {
-       parts  = gameObject.GetComponent<ParticleSystem>();
+		AudioSource audioData = GetComponent<AudioSource>();
+		audioData.Play(0);
+		parts  = gameObject.GetComponent<ParticleSystem>();
         totalDuration = parts.duration + parts.startLifetime;
         Destroy(gameObject, totalDuration);
     }

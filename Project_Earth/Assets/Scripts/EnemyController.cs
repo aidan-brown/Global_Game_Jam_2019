@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
    
     [SerializeField] GameObject attackTarget;
     [SerializeField] float speed = 1;
+	private AudioSource audioData;
     public GameObject effect;
     private int health = 100;
 
@@ -14,7 +15,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        attackTarget = GameObject.FindGameObjectsWithTag("Earth")[0];
+		attackTarget = GameObject.FindGameObjectsWithTag("Earth")[0];
     }
 
     // Update is called once per frame
@@ -30,7 +31,7 @@ public class EnemyController : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Earth"))
         {
-            destroyShip();
+			destroyShip();
             other.BroadcastMessage("TakeDamage");
         }
         else if (other.gameObject.CompareTag("PlayerBullet"))
@@ -41,6 +42,11 @@ public class EnemyController : MonoBehaviour
         }
     }
     
+	public void changeAttackTarget(GameObject target)
+	{
+		attackTarget = target;
+	}
+
 
 	private void rotateToTarget()
 	{
@@ -54,7 +60,8 @@ public class EnemyController : MonoBehaviour
 
     public void destroyShip()
     {
-        Instantiate(effect, transform.position, Quaternion.identity);
+        
+		Instantiate(effect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
