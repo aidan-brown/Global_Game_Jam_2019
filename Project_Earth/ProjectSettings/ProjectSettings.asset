@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-  productGUID: 50e3941996718fa45a4ff528a49f761d
+  productGUID: f8aa19f5bf1e690418a8e3352435918b
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -611,10 +611,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: b9a017d2-4cda-42d3-a29d-964278365b0f
+  cloudProjectId: 
   framebufferDepthMemorylessMode: 0
-  projectName: Project_Earth
-  organizationId: aidan-4560691
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

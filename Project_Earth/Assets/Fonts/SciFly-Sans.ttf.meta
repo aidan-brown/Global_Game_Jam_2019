@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6f835a7483d5b624ab6ccc5c2c3d5920
+guid: dd0762403e456ed40a8a7f23e30372c1
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,7 +11,8 @@ TrueTypeFontImporter:
   fontName: SciFly
   fontNames:
   - SciFly
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6f835a7483d5b624ab6ccc5c2c3d5920, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
